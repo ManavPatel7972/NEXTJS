@@ -8,6 +8,7 @@ export default async function page({ searchParams }: any) {
       <center style={{ marginTop: "40px" }}>
         PageNo : {pageNo.toString()}
       </center>
+    
     </h1>
   );
 }
