@@ -14,6 +14,7 @@ export const connectDB = async () => {
       console.log("Already connected!");
       return;
     }
+    
     await mongoose.connect(process.env.DB_URL + "/Todo");
     console.log("Database Successfully Connected!");
   } catch (err) {
