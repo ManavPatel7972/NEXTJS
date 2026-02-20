@@ -72,6 +72,7 @@ export default function RegisterPage() {
               placeholder="example%1345"
             />
           </div>
+
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-md font-medium hover:opacity-90"
