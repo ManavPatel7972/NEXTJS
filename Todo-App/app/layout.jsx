@@ -1,8 +1,8 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Inter } from "next/font/google";
+import Providers from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata = {
   title: "Todo App",
@@ -12,10 +12,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
-        </ThemeProvider>
+      <body >
+        <Providers>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            {children}
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

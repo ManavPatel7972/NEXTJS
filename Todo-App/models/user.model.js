@@ -11,19 +11,15 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-    },
 
     isGoogleUser: {
       type: Boolean,
-      default: false,
+      default: true,
     },
-    
   },
   { timestamps: true },
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;

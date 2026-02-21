@@ -6,11 +6,12 @@ const todoSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
     completed: {
       type: Boolean,
       default: false,
-      required: true,
     },
+
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -20,5 +21,5 @@ const todoSchema = mongoose.Schema(
   { timestamps: true },
 );
 
-const Todo = mongoose.model("Todo", todoSchema);
+const Todo = mongoose.models.Todo || mongoose.model("Todo", todoSchema);
 export default Todo;

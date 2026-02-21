@@ -6,7 +6,7 @@ import TodoForm from "@/components/TodoForm";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import { signOut } from "next-auth/react";
 export default function Home() {
   const router = useRouter();
   const [todos, setTodos] = useState([]);
@@ -14,6 +14,8 @@ export default function Home() {
     name: "",
     email: "",
   });
+
+  const [logoutLoading, setLogoutLoading] = useState(false);
 
   const { theme = "dark", setTheme } = useTheme();
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -39,13 +41,16 @@ export default function Home() {
   const fetchUser = async () => {
     const response = await fetch("/api/user");
     const data = await response.json();
+
     if (response.status === 401) {
       return router.push("/login");
     }
+
     if (!data.error) {
       setUser(data);
     }
   };
+
   const fetchTodos = async () => {
     const response = await fetch("/api/todos");
     const data = await response.json();
@@ -97,14 +102,8 @@ export default function Home() {
   };
 
   const handleLogout = async () => {
-    const response = await fetch(`/api/logout`, {
-      method: "POST",
-    });
-
-    // console.log("Logout Response ====>", response);
-    if (response.status === 204) {
-      return router.push("/login");
-    }
+    setLogoutLoading(true);
+    await signOut({ callbackUrl: "/login" });
   };
 
   return (
