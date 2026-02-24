@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
-import { verifyAccessToken } from "@/lib/jwt";
-import User from "@/models/User.model";
-import { connectDB } from "@/lib/db";
 import { redirect } from "next/navigation";
 import React from "react";
+import { connectDB } from "../../lib/db";
+import { verifyAccessToken } from "../../lib/jwt";
+import User from "../../models/User.model";
 
 export default async function AdminPage() {
   await connectDB();
