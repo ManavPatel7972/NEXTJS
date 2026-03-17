@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model student {
+  id   Int?
+  name String? @db.VarChar(20)
+
+  @@ignore
+}
+
+model faculty {
+  id     Int?
+  name   String?  @db.VarChar(20)
+  salary Decimal? @db.Decimal(5, 2)
+
+  @@ignore
+}
+
+
+model course {
+  id        Int @id @default(autoincrement())
+  name      String? @db.VarChar(20)
+  facultyId Int?
+
+}
