@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model movie_rating {
+  RatingID      Int    @id @default(autoincrement())
+  MovieID       Int
+  UserID        Int
+  RatingStar    Float
+  RatingComment String @db.VarChar(1000)
+  movies        movies @relation(fields: [MovieID], references: [MovieID], onUpdate: Restrict, map: "movie_rating_ibfk_1")
+  users         users  @relation(fields: [UserID], references: [UserID], onUpdate: Restrict, map: "movie_rating_ibfk_2")
+
+  @@index([MovieID], map: "MovieID")
+  @@index([UserID], map: "UserID")
+}
+
+model movies {
+  MovieID      Int            @id @default(autoincrement())
+  MovieName    String         @db.VarChar(100)
+  MovieImage   String         @db.VarChar(300)
+  movie_rating movie_rating[]
+}
+
+model users {
+  UserID       Int            @id @default(autoincrement())
+  UserName     String         @db.VarChar(100)
+  Password     String         @db.VarChar(300)
+  movie_rating movie_rating[]
+}
